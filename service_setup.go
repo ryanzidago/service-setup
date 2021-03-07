@@ -1,12 +1,12 @@
 package main
 
 import (
-	"log"
 	"fmt"
-	"service_setup/config"
+	"log"
 	"service_setup/clients/herokuclient"
-	"service_setup/clients/rollbarclient"
 	"service_setup/clients/logentriesclient"
+	"service_setup/clients/rollbarclient"
+	"service_setup/config"
 )
 
 func main() {
