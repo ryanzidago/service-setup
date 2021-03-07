@@ -38,4 +38,4 @@ To make it work:
     }
   ```
 
-After you've add your configuration, simple run `./service-setup` to run the tool.
+After you've added your configuration, simple run `./service-setup` to run the tool.
