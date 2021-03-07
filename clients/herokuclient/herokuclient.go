@@ -9,6 +9,7 @@ import (
 
 var client string = "heroku"
 
+// GetTeam get your team's name on Heroku
 func GetTeam() map[string]interface{} {
 	message := fmt.Sprint("Getting Heroku Team ...", "\n")
 	log.Println(message)
@@ -18,6 +19,8 @@ func GetTeam() map[string]interface{} {
 	return resp.(map[string]interface{})
 }
 
+// CreateAddon adds the `heroku-postgresql` addon
+// to the given Heroku app
 func CreateAddon(app map[string]interface{}) map[string]interface{} {
 	message := fmt.Sprint("Adding heroku-postgresql to ", app["name"], "\n")
 	log.Println(message)
@@ -32,6 +35,7 @@ func CreateAddon(app map[string]interface{}) map[string]interface{} {
 	return resp.(map[string]interface{})
 }
 
+// AddBuildpacks adds buildpacks to the given Heroku app
 func AddBuildpacks(app map[string]interface{}, buildpacks []string) []interface{} {
 	message := fmt.Sprint("Adding default buildpacks to ", app["name"], "\n")
 	log.Println(message)
@@ -51,15 +55,8 @@ func AddBuildpacks(app map[string]interface{}, buildpacks []string) []interface{
 	return resp.([]interface{})
 }
 
-func GetAccountInfo() map[string]interface{} {
-	message := fmt.Sprint("Getting account information ", "\n")
-	log.Println(message)
-
-	url := fmt.Sprint(config.Reader.HerokuAPIEndpoint, "/account")
-	resp := httphelper.ExecuteGetRequestAndParseResp(url, client)
-	return resp.(map[string]interface{})
-}
-
+// CreatePipeline creates a pipeline for the given team
+// which will become the pipeline's owner
 func CreatePipeline(pipelineName string, owner map[string]interface{}) map[string]interface{} {
 	message := fmt.Sprint("Creating pipeline ", "\n")
 	log.Println(message)
@@ -77,6 +74,7 @@ func CreatePipeline(pipelineName string, owner map[string]interface{}) map[strin
 	return resp.(map[string]interface{})
 }
 
+// CreateApp creates the app on Heroku
 func CreateApp(contextName string) map[string]interface{} {
 	message := fmt.Sprint("Creating ", contextName, " application", "\n")
 	log.Println(message)
@@ -92,6 +90,7 @@ func CreateApp(contextName string) map[string]interface{} {
 	return resp.(map[string]interface{})
 }
 
+// CoupleAppWithPipeline couples the Heroku app to the newly pipeline
 func CoupleAppWithPipeline(app map[string]interface{}, pipeline map[string]interface{}, stage string) map[string]interface{} {
 	message := fmt.Sprint("Coupling ", app["name"], " with pipeline ...", "\n")
 	log.Println(message)
@@ -107,6 +106,7 @@ func CoupleAppWithPipeline(app map[string]interface{}, pipeline map[string]inter
 	return resp.(map[string]interface{})
 }
 
+// ConfigureRollbar adds the ROLLBAR_ACESS_TOKEN and ROLLBAR_ENVIRONMENT to the Heroku app
 func ConfigureRollbar(rollbarAccessToken map[string]interface{}, env string, app map[string]interface{}) map[string]interface{} {
 	message := fmt.Sprint("Configuring Rollbar on Heroku ...", "\n")
 	log.Println(message)
@@ -120,6 +120,8 @@ func ConfigureRollbar(rollbarAccessToken map[string]interface{}, env string, app
 	return resp.(map[string]interface{})
 }
 
+// CreateLogDrain configures the Heroku app
+// so that its log are drained to Logentries
 func CreateLogDrain(app, logData map[string]interface{}) map[string]interface{} {
 	message := fmt.Sprint("Configuring log draining from Heroku to Logentries ...", "\n")
 	log.Println(message)

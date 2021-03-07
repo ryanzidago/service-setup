@@ -10,6 +10,7 @@ import (
 
 var client string = "rollbar"
 
+// CreateProject creates a new Rollbar project
 func CreateProject(contextName string) map[string]interface{} {
 	message := fmt.Sprint("Creating new ", contextName, " project on Rollbar ...", "\n")
 	log.Println(message)
@@ -24,10 +25,11 @@ func CreateProject(contextName string) map[string]interface{} {
 	return resp.(map[string]interface{})
 }
 
+// GetPostServerItemAccessTokens fetch the post_servier_item from a Rollbar project
 func GetPostServerItemAccessTokens(rollbarProject map[string]interface{}) map[string]interface{} {
 	message := fmt.Sprint("Fetching post_server_item (access tokens)", "\n")
 	log.Println(message)
-	
+
 	rollbarProjectID := rollbarProject["result"].(map[string]interface{})["id"]
 	url := fmt.Sprint(config.Reader.RollbarAPIEndpoint, "/project", "/", rollbarProjectID, "/access_tokens")
 	resp := httphelper.ExecuteGetRequestAndParseResp(url, client)

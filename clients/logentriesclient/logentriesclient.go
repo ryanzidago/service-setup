@@ -10,6 +10,7 @@ import (
 
 var client string = "logentries"
 
+// CreateLog creates a new log in Logentries 
 func CreateLog(contextName string, env string) map[string]interface{} {
 	message := fmt.Sprint("Creating log in Logentries for ", contextName, " ", env, "\n")
 	log.Println(message)
