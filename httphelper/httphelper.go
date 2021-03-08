@@ -52,7 +52,7 @@ func sendRequest(req *http.Request) *http.Response {
 }
 
 func newPostRequest(jsonData []byte, url string) *http.Request {
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(jsonData))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -60,7 +60,7 @@ func newPostRequest(jsonData []byte, url string) *http.Request {
 }
 
 func newPatchRequest(jsonData []byte, url string) *http.Request {
-  req, err := http.NewRequest("PATCH", url, bytes.NewBuffer(jsonData))
+  req, err := http.NewRequest(http.MethodPatch, url, bytes.NewBuffer(jsonData))
   if err != nil {
     log.Fatal(err)
   }
@@ -68,7 +68,7 @@ func newPatchRequest(jsonData []byte, url string) *http.Request {
 }
 
 func newPutRequest(jsonData []byte, url string) *http.Request {
-	req, err := http.NewRequest("PUT", url, bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest(http.MethodPut, url, bytes.NewBuffer(jsonData))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -76,7 +76,7 @@ func newPutRequest(jsonData []byte, url string) *http.Request {
 }
 
 func newGetRequest(url string) *http.Request  {
-  req, err := http.NewRequest("GET", url, nil)
+  req, err := http.NewRequest(http.MethodGet, url, nil)
   if err != nil {
     log.Fatal(err)
   }

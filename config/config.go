@@ -2,8 +2,8 @@ package config
 
 import (
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
+	"os"
+	"log"
 )
 
 // Config struct holds the application's configuration
@@ -25,16 +25,21 @@ type Config struct {
 // Reader is used by other modules to read the application's configuration
 var Reader Config
 
-// InitConfig simply parses the `.config.json` file
-// into a Config struct
+// InitConfig simply parses the `.config.json` file into a Config struct
 // and loads the struct into the Reader global variable
 func InitConfig() {
-	file, err := ioutil.ReadFile("config/.config.json")
+	var config Config
+	file, err := os.Open("config/.config.json")
+	defer file.Close()
+
 	if err != nil {
-		fmt.Println("Err")
+		log.Println("Error reading file ", err)
 	}
 
-	var config Config
-	json.Unmarshal([]byte(file), &config)
-	Reader = config
+	err = json.NewDecoder(file).Decode(&config)
+	if err != nil {
+		log.Printf("Error decoding JSON: %v\n", err)
+
+		Reader = config
+	}
 }
