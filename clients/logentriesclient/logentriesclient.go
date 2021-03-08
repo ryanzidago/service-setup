@@ -28,7 +28,7 @@ func CreateLog(contextName string, env string) map[string]interface{} {
 			"tokens":      [0]string{},
 			"logsets_info": [1]map[string]string{
 				map[string]string{
-					"id": config.Reader.TeamLogsetKey,
+					"id": config.Reader.LogentriesLogsetKey,
 				},
 			},
 		},
