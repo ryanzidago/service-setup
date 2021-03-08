@@ -39,4 +39,4 @@ To make it work:
   * `LOGENTRIES_LOGSET_KEY`
   * `ROLLBAR_ACCOUNT_ACCESS_TOKEN`
 
-After you've added your configuration, simple run `go build service_setup.go` to build the binary and then `./service-setup` to run the tool.
+After you've added your configuration, simple run `go build service_setup.go` to build the binary and then `./service_setup` to run the tool.
